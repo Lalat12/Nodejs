@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Form</title>
+  <script>
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const dob = new Date(document.getElementById('dob').value);
+  
+      // Validate name
+      if (name === '') {
+        alert('Please enter your name.');
+        return false;
+      }
+  
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+      }
+      
+      // Validate phone
+      if (phone === '') {
+        alert('Invalid phone number.');
+        return;
+      }
+  
+      // Validate age (DoB)
+      const now = new Date();
+      const age = Math.floor((now - dob) / 31557600000); // Calculate age in years
+      if (age < 18) {
+        alert('You must be at least 18 years old to use this service.');
+        return false;
+      }
+  
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <h1>User Form</h1>
+  <form action="/user-form" method="POST" onsubmit="return validateForm();">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name"><br>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" name="dob" id="dob"><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email"><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" name="phone" id="phone"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
